@@ -178,11 +178,9 @@ public class Board {
                 int rowCoordinate = Integer.parseInt(coordinatesStr[0]);
                 int colCoordinate = Integer.parseInt(coordinatesStr[1]);
                 Coordinate c = new Coordinate(rowCoordinate-1, colCoordinate-1);
-                System.out.println("The coordinates for boat " + splittedLine[0] + " " + c.getRow() + " " + c.getCol() + " the order: " + numOfCoordinates);
                 coordinateArray.put(c, i-1);
                 numOfCoordinates++;
             }
-            System.out.println("length " + coordinateArray.getCoordinateArray().length + " num "+ numOfCoordinates);
             if (coordinateArray.isValid() && this.isAvailable(coordinateArray) &&
             coordinateArray.getCoordinateArray().length == numOfCoordinates){
                 boatPlacement.put(splittedLine[0].charAt(0),coordinateArray);

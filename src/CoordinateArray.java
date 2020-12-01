@@ -38,14 +38,18 @@ public class CoordinateArray {
     }
 
     public boolean isValid(){
-        //checks if Coordinates are not duplicate and if they are grouped
+        //checks if Coordinates are not duplicated & checks if Coordinates are grouped
         if(this.isEmpty()){
             return false;
         }
+        return this.isGroped() && this.hasDuplicates();
+    }
+
+    public boolean hasDuplicates(){
         int numOfEqualCoordinates = 0;
         for(Coordinate c1 : coordinateArray){
             for(Coordinate c2 : coordinateArray){
-                //Check for Duplicacy
+                //Check for Duplicity
                 if(Arrays.equals(c1.getCoordinate(), c2.getCoordinate())){
                     numOfEqualCoordinates++;
                 }
@@ -57,7 +61,7 @@ public class CoordinateArray {
                 numOfEqualCoordinates = 0;
             }
         }
-        return this.isGroped();
+        return true;
     }
 
     public boolean isGroped(){

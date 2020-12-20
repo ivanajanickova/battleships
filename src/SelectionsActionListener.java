@@ -5,18 +5,19 @@ import java.awt.event.ActionListener;
 public class SelectionsActionListener implements ActionListener {
 
     SelectionScreen selectionScreen;
+    ChooseScoring scoring;
 
-    public void ListenTo(SelectionScreen selectionScreen){
+    public void listenTo(SelectionScreen selectionScreen){
         this.selectionScreen = selectionScreen;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(selectionScreen.isChoosePlacement(e)){
-            ChoosePlacement c = new ChoosePlacement();
+            ChoosePlacement placement = new ChoosePlacement();
         }
         else if (selectionScreen.isChooseScoring(e)){
-            ChooseScoring c = new ChooseScoring();
+            scoring = new ChooseScoring();
         }
         else  if(selectionScreen.isRules(e)){
             //TODO
@@ -25,10 +26,10 @@ public class SelectionsActionListener implements ActionListener {
             //TODO
         }
         else if(selectionScreen.isExit(e)){
-            //TODO
+            selectionScreen.getFrame().dispose();
         }
         else if(selectionScreen.isStart(e)){
-            //TODO
+            PlayerSelectionScreen p =  new PlayerSelectionScreen(selectionScreen, scoring);
         }
     }
 }

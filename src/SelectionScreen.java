@@ -1,8 +1,9 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class SelectionScreen {
 
@@ -12,8 +13,13 @@ public class SelectionScreen {
     private JButton highScores;
     private JButton exit;
     private JButton start;
+    private JFrame frame;
+    private int width = 8;
+    private int height = 8;
 
-
+    public JFrame getFrame() {
+        return frame;
+    }
 
     private ActionListener actionListener;
 
@@ -25,10 +31,26 @@ public class SelectionScreen {
         return actionListener;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public SelectionScreen(ActionListener l) {
         setActionListener(l);
 
-        JFrame frame = new JFrame("Battleship Game: Selection Screen");
+        frame = new JFrame("Battleship Game: Selection Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -50,7 +72,23 @@ public class SelectionScreen {
         panel2.setBackground(Color.lightGray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
         JSpinner rowSpinner = new JSpinner();
+        rowSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(e.getSource() == rowSpinner){
+                   height = (Integer) rowSpinner.getValue();
+                }
+            }
+        });
         JSpinner colSpinner = new JSpinner();
+        colSpinner.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(e.getSource() == colSpinner){
+                    width = (Integer) colSpinner.getValue();
+                }
+            }
+        });
         panel2.add(new JLabel("Choose the Board Size"));
         panel2.add(new JLabel("Rows"));
         panel2.add(rowSpinner);
@@ -73,8 +111,11 @@ public class SelectionScreen {
         panel4.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel4.setBackground(Color.lightGray);
         rules = new JButton("Rules");
+        rules.addActionListener(getActionListener());
         highScores = new JButton("High Scores");
+        highScores.addActionListener(getActionListener());
         exit = new JButton("Exit");
+        exit.addActionListener(getActionListener());
         panel4.add(rules);
         panel4.add(highScores);
         panel4.add(exit);
@@ -85,6 +126,7 @@ public class SelectionScreen {
         panel5.setBackground(Color.lightGray);
         start = new JButton("Start Game");
         start.setAlignmentX(Component.CENTER_ALIGNMENT);
+        start.addActionListener(getActionListener());
         panel5.add(start);
         panel5.add(panel4);
 
@@ -94,7 +136,6 @@ public class SelectionScreen {
         frame.pack();
         frame.setVisible(true);
     }
-
 
     public boolean isChoosePlacement(ActionEvent e){
         return e.getSource() == choosePlacement;
@@ -115,10 +156,9 @@ public class SelectionScreen {
         return e.getSource() == start;
     }
 
-
     public static void main(String[] args) {
         SelectionsActionListener sa = new SelectionsActionListener();
         SelectionScreen s1 = new SelectionScreen(sa);
-        sa.ListenTo(s1);
+        sa.listenTo(s1);
     }
 }

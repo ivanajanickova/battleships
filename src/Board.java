@@ -10,6 +10,7 @@ public class Board {
 
     private int width;
     private int length;
+    //private file file;
     private final HashMap<String, Integer> BOATS = new HashMap<>() {{
         put("Carrier", 5);
         put("Battleship", 4);
@@ -19,6 +20,8 @@ public class Board {
     //STORE BOATS in a hash map of string with
     private HashMap<Character, CoordinateArray> boatPlacement = new HashMap<>();
     private Character[][] board;
+    private Player player1;
+    private Player player2;
 
     public int getWidth() {
         return width;
@@ -56,10 +59,12 @@ public class Board {
         this.board = board;
     }
 
-    public Board(int width, int length){
-        if(width<6 || length<6){
+    public Board(int width, int length, Player player1, Player player2){
+        this.player1 = player1;
+        this.player2 = player2;
+        if(width<8 || length<8){
             JOptionPane.showMessageDialog(null, "Please increase the board dimensions. \n " +
-                    "Minimal size is 6x6.");
+                    "Minimal size is 8x8.");
             //method that allows user to re-Enter the input
         }
         else{
@@ -93,7 +98,6 @@ public class Board {
             for(int j=0; j<width; j++){
                 board[i][j] = '*';
             }
-
         }
         for(Character i : boatPlacement.keySet()){
             for(Coordinate c : boatPlacement.get(i).getCoordinateArray()){
@@ -101,6 +105,9 @@ public class Board {
             }
         }
         this.setBoard(board);
+        BoardActionListener b = new BoardActionListener();
+        BoardScreen screen = new BoardScreen(this, b, player1, player2);
+        b.listenTo(screen);
     }
 
     public void generateBoatPlacement(){
@@ -215,6 +222,12 @@ public class Board {
             }
             return true;
         }
+    }
+
+    public void addPlayers(Player player1, Player player2){
+        System.out.println("player1 name: (inside board) " + player1.getName());
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
 }

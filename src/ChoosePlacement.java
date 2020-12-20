@@ -6,8 +6,6 @@ import java.io.File;
 
 public class ChoosePlacement {
 
-    private Board board;
-
     ChoosePlacement(){
         JFrame frame = new JFrame("Choose Placement");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +31,7 @@ public class ChoosePlacement {
         panel1.add(chooseRandom);
 
         //panel 2
+
         JPanel panel2 = new JPanel();
         panel2.setBackground(Color.lightGray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
@@ -57,14 +56,6 @@ public class ChoosePlacement {
                      response = chooser.showOpenDialog(null);
                      if (response == JFileChooser.APPROVE_OPTION) {
                          file = chooser.getSelectedFile();
-                         Board b2 = new Board(file);
-                         Character[][] ch = b2.getBoard();
-                         for (Character[] i : ch) {
-                             for (Character j : i) {
-                                 System.out.print(j);
-                             }
-                             System.out.println();
-                         }
                      }
                  }
                  frame.dispose();
@@ -86,10 +77,4 @@ public class ChoosePlacement {
         frame.setVisible(true);
 
     }
-
-    public static void main(String[] args) {
-        new ChoosePlacement();
-    }
-
-
 }

@@ -29,13 +29,13 @@ public class Coordinate {
         this.coordinate[1] = col;
     }
 
-    public Coordinate(int row, int col){
+    public Coordinate(int row, int col) {
         this.setRow(row);
         this.setCol(col);
         this.setCoordinate(row, col);
     }
 
-    public boolean isEqual(Coordinate c){
-        return this.getRow() == c.getRow() && this.getCol() == c.getCol();
+    public boolean isEqual(Coordinate c) {
+        return (this.getRow() == c.getRow() && this.getCol() == c.getCol());
     }
 }

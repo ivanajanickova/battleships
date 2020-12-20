@@ -9,9 +9,9 @@ public class ChooseScoring implements ActionListener {
     private JButton no;
     private JFrame frame;
 
-    private static boolean favored = false;
+    private  boolean favored = false;
 
-    public static boolean isFavored() {
+    public boolean isFavored() {
         return favored;
     }
 
@@ -23,7 +23,7 @@ public class ChooseScoring implements ActionListener {
         panel1.setBackground(Color.lightGray);
         panel1.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel label = new JLabel("Would you like to add 3 points in favor of the first player?");
+        JLabel label = new JLabel("Would you like to favor 1st played and double her/his points earned?");
         label.setFont(new Font("Serif", Font.PLAIN, 15));
         label.setPreferredSize(new Dimension(470, 50));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -94,4 +94,27 @@ public class CoordinateArray {
         }
         return zeroVals > 1;
     }
+
+    public int length(){
+        int lenght = 0;
+        for(Coordinate c:this.getCoordinateArray()){
+            lenght++;
+        }
+        return lenght;
+    }
+
+    public Coordinate getCoordinateAtIndex(int index){
+        return coordinateArray[index];
+    }
+
+    public void removeAtIndex(int index){
+        Coordinate[] copy = new Coordinate[this.length() - 1];
+
+        for (int i = 0, j = 0; i < this.length(); i++) {
+            if (i != index) {
+                copy[j++] = this.getCoordinateAtIndex(i);
+            }
+        }
+        this.coordinateArray = copy;
+    }
 }

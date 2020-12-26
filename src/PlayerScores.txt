@@ -1,0 +1,29 @@
+Judy 25
+Frank 55
+Mike 28
+Adam 44
+Rebecca 36
+Elon 35
+Richard 50
+Trevor 38
+Bill 42
+Lucy 33
+Thomas 45
+Luc 55
+Jimmy 32
+Daniel 18
+Peter 62
+Anne 44
+Sophie 36
+Harry 50
+Liam 30
+Richard 32
+Jane 48
+Thomas 70
+Alica 60
+Anais 20
+Alica 36
+Monica 44
+Alica 30
+
+

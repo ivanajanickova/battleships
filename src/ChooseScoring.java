@@ -18,14 +18,14 @@ public class ChooseScoring implements ActionListener {
     public ChooseScoring() {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(600, 100));
 
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.lightGray);
         panel1.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel label = new JLabel("Would you like to favor 1st played and double her/his points earned?");
+        JLabel label = new JLabel("Would you like to favor 1st played by adding 2 points to his score?");
         label.setFont(new Font("Serif", Font.PLAIN, 15));
-        label.setPreferredSize(new Dimension(470, 50));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel1.add(label);

@@ -18,10 +18,8 @@ public class Board {
         put("Destroyer", 2);
     }};
     //STORE BOATS in a hash map of string with
-    private HashMap<Character, CoordinateArray> boatPlacement = new HashMap<>();
+    private HashMap<Character, CoordinateArray> BOAT_PLACEMENT = new HashMap<>();
     private Character[][] board;
-    private Player player1;
-    private Player player2;
 
     public int getWidth() {
         return width;
@@ -39,16 +37,8 @@ public class Board {
         this.length = height;
     }
 
-    public HashMap<Character, CoordinateArray> getBoatPlacement() {
-        return boatPlacement;
-    }
-
-    public void setBoatPlacement(HashMap<Character, CoordinateArray> boatPlacement) {
-        this.boatPlacement = boatPlacement;
-    }
-
-    public HashMap<String, Integer> getBOATS() {
-        return BOATS;
+    public HashMap<Character, CoordinateArray> getBOAT_PLACEMENT() {
+        return BOAT_PLACEMENT;
     }
 
     public Character[][] getBoard() {
@@ -59,9 +49,7 @@ public class Board {
         this.board = board;
     }
 
-    public Board(int width, int length, Player player1, Player player2){
-        this.player1 = player1;
-        this.player2 = player2;
+    public Board(int width, int length){
         if(width<8 || length<8){
             JOptionPane.showMessageDialog(null, "Please increase the board dimensions. \n " +
                     "Minimal size is 8x8.");
@@ -80,10 +68,9 @@ public class Board {
         if(width == 0 || length == 0){
             JOptionPane.showMessageDialog(null, "The file is not valid.");
         }
-        else if(width<6 || length<6){
+        else if(width<8 || length<8){
             JOptionPane.showMessageDialog(null, "Please increase the board dimensions. \n " +
-                    "Minimal size is 6x6.");
-            //method that allows user to re-Enter the input
+                    "Minimal size is 8x8.");
         }
         else {
             this.createBoard();
@@ -99,15 +86,12 @@ public class Board {
                 board[i][j] = '*';
             }
         }
-        for(Character i : boatPlacement.keySet()){
-            for(Coordinate c : boatPlacement.get(i).getCoordinateArray()){
+        for(Character i : BOAT_PLACEMENT.keySet()){
+            for(Coordinate c : BOAT_PLACEMENT.get(i).getCoordinateArray()){
                 board[c.getRow()][c.getCol()] = i;
             }
         }
         this.setBoard(board);
-        BoardActionListener b = new BoardActionListener();
-        BoardScreen screen = new BoardScreen(this, b, player1, player2);
-        b.listenTo(screen);
     }
 
     public void generateBoatPlacement(){
@@ -139,7 +123,7 @@ public class Board {
                             BOATS.get(i), "Horizontal");
                 }
             }
-            boatPlacement.put(i.charAt(0), coordinates);
+            BOAT_PLACEMENT.put(i.charAt(0), coordinates);
         }
     }
 
@@ -190,16 +174,11 @@ public class Board {
             }
             if (coordinateArray.isValid() && this.isAvailable(coordinateArray) &&
             coordinateArray.getCoordinateArray().length == numOfCoordinates){
-                boatPlacement.put(splittedLine[0].charAt(0),coordinateArray);
+                BOAT_PLACEMENT.put(splittedLine[0].charAt(0),coordinateArray);
             }
             else {
                 JOptionPane.showMessageDialog(null, "The file is not valid.");
-                //call method that will redirect back to option window
             }
-        }
-        else {
-            System.out.println("todo");
-            //call method that will redirect back to option window
         }
     }
 
@@ -207,12 +186,12 @@ public class Board {
         if (coordinates.isEmpty()){
             return false;
         }
-        else if(boatPlacement.isEmpty()){
+        else if(BOAT_PLACEMENT.isEmpty()){
             return true;
         }
         else {
             for(Coordinate i : coordinates.getCoordinateArray()){
-                for(CoordinateArray j : boatPlacement.values()){
+                for(CoordinateArray j : BOAT_PLACEMENT.values()){
                     for(Coordinate c : j.getCoordinateArray()){
                         if(i.isEqual(c) || i.getRow() > this.length || i.getCol() > this.width){
                             return false;
@@ -222,12 +201,6 @@ public class Board {
             }
             return true;
         }
-    }
-
-    public void addPlayers(Player player1, Player player2){
-        System.out.println("player1 name: (inside board) " + player1.getName());
-        this.player1 = player1;
-        this.player2 = player2;
     }
 
 }

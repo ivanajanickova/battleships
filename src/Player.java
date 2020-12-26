@@ -1,33 +1,31 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Player {
 
     private String name;
     private int score = 0;
-    private boolean isFirst = false;
-    private boolean isChangedScoring = false;
+    private final HashMap<Character, Integer> SCORING_MAP = new HashMap<>() {{
+        put('C', 2);
+        put('B', 4);
+        put('S', 6);
+        put('D', 8);
+    }};
 
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void changeScoring(){
+        this.score = this.score + 2;
     }
-
-    public void changeScoring(boolean b){
-        this.isChangedScoring = b;
-    }
-    public void addScore(int score){
-        if(!isChangedScoring || !isFirst) {
-            this.score = this.score + score;
+    public void addScore(ArrayList<Character> boatsDestroyed, Character boat){
+        if(boatsDestroyed != null && boatsDestroyed.contains(boat)){
+            this.score = this.score + SCORING_MAP.get(boat)*2;
         }
-        else {
-            this.score = this.score + score/2;
-        }
-    }
-
-
-    public void setFirst(boolean b){
-        isFirst = true;
+        else{
+            this.score = this.score + SCORING_MAP.get(boat);
+            }
     }
 
     public String getName() {

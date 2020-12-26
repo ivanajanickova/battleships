@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class SelectionScreen {
 
@@ -16,6 +17,7 @@ public class SelectionScreen {
     private JFrame frame;
     private int width = 8;
     private int height = 8;
+    private File file = null;
 
     public JFrame getFrame() {
         return frame;
@@ -47,6 +49,14 @@ public class SelectionScreen {
         this.width = width;
     }
 
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
     public SelectionScreen(ActionListener l) {
         setActionListener(l);
 
@@ -61,7 +71,7 @@ public class SelectionScreen {
         JLabel title = new JLabel("Welcome to Battleship");
         title.setFont(new Font("Serif", Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel subtitle = new JLabel("Please slect your options and get started");
+        JLabel subtitle = new JLabel("Please select your options and get started");
         subtitle.setFont(new Font("Serif", Font.PLAIN, 20));
         subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel1.add(title);

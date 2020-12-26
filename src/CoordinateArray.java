@@ -116,5 +116,14 @@ public class CoordinateArray {
             }
         }
         this.coordinateArray = copy;
+        System.out.println();
+    }
+
+    public int size(){
+        int size = 0;
+        for(Coordinate c : this.getCoordinateArray()){
+            size ++;
+        }
+        return size;
     }
 }

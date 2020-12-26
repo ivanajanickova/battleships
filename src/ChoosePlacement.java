@@ -6,6 +6,16 @@ import java.io.File;
 
 public class ChoosePlacement {
 
+    private File file = null;
+    private Board board;
+
+    public File getFile() {
+        return this.file;
+    }
+    public Board getBoard(){
+        return this.board;
+    }
+
     ChoosePlacement(){
         JFrame frame = new JFrame("Choose Placement");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,7 +41,6 @@ public class ChoosePlacement {
         panel1.add(chooseRandom);
 
         //panel 2
-
         JPanel panel2 = new JPanel();
         panel2.setBackground(Color.lightGray);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.Y_AXIS));
@@ -39,7 +48,7 @@ public class ChoosePlacement {
         JLabel l2 = new JLabel("Choose valid file with boat placement.");
         l2.setFont(new Font("Serif",Font.BOLD, 15));
         l2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JLabel l3 = new JLabel("To see rules for a valid file plese see the 'Rules' section");
+        JLabel l3 = new JLabel("To see rules for a valid file please see the 'Rules' section");
         l3.setFont(new Font("Serif",Font.ITALIC, 10));
         l3.setAlignmentX(Component.LEFT_ALIGNMENT);
         JButton chooseFile = new JButton("Choose File");
@@ -48,7 +57,6 @@ public class ChoosePlacement {
              @Override
              public void actionPerformed(ActionEvent e) {
                  if (e.getSource() == chooseFile) {
-                     File file;
                      int response;
                      JFileChooser chooser = new JFileChooser(".");
 
@@ -56,6 +64,7 @@ public class ChoosePlacement {
                      response = chooser.showOpenDialog(null);
                      if (response == JFileChooser.APPROVE_OPTION) {
                          file = chooser.getSelectedFile();
+                         board = new Board(file);
                      }
                  }
                  frame.dispose();
@@ -76,5 +85,12 @@ public class ChoosePlacement {
         frame.pack();
         frame.setVisible(true);
 
+    }
+
+    public boolean boardExists(){
+        if(this.board == null){
+            return false;
+        }
+        return this.board.getBoard() != null;
     }
 }
